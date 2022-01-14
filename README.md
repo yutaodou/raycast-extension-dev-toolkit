@@ -3,8 +3,9 @@
 A collection of development utilities.
 - Base64 encode
 - Base64 decode
-- Unix timestamp
-- Unix timestamp to ISO date string
+- Local timestamp
+- Local Date
+- Timestamp to Date
 - Prettify json
 - Minisize json
 - IP address

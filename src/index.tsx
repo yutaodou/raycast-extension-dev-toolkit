@@ -1,5 +1,5 @@
 import { List } from "@raycast/api";
-import { base64Decode, base64Encode, localDateISO8601, localTimestamp, timestamp } from "./actions";
+import { base64Decode, base64Encode, localDateISO8601, localTimestamp, timestamp, timestampToDateString } from "./actions";
 import ClipboardAction from "./ClipboardAction";
 
 export default function Command() {
@@ -31,11 +31,18 @@ export default function Command() {
           actions={<ClipboardAction title="Timestamp" action={localTimestamp} />}
         />
         <List.Item
-          key="3"
+          key="4"
           icon="list-icon.png"
-          title="Local Datetime"
-          subtitle="Return local datetime in ISO8601 format"
+          title="Local Date"
+          subtitle="Return local date in ISO8601 format"
           actions={<ClipboardAction title="Timestamp" action={localDateISO8601} />}
+        />
+        <List.Item
+          key="5"
+          icon="list-icon.png"
+          title="Timestamp to Date"
+          subtitle="Convert timestam to date and return in ISO8601 format"
+          actions={<ClipboardAction title="Timestamp" action={timestampToDateString} />}
         />
       </List.Section>
     </List>
