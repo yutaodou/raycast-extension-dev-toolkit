@@ -1,6 +1,6 @@
-import { List } from "@raycast/api";
-import { base64Decode, base64Encode, localDateISO8601, localTimestamp, timestamp, timestampToDateString } from "./actions";
-import ClipboardAction from "./ClipboardAction";
+import { List } from "@raycast/api"
+import { base64Decode, base64Encode, localDateISO8601, localTimestamp, timestampToDateString } from "./actions"
+import ClipboardAction from "./ClipboardAction"
 
 export default function Command() {
   return (
