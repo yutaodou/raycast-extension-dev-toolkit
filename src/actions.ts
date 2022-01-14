@@ -1,5 +1,8 @@
+import getUnixTime from 'date-fns/getUnixTime';
+import formatISO from "date-fns/formatISO"
+
 export type ActionResult = {
-  value?: string;
+  value?: any;
   error?: Error;
 };
 
@@ -12,3 +15,15 @@ export const base64Decode = (input: string): ActionResult => {
   const buffer = Buffer.from(input, "base64");
   return { value: buffer.toString("utf-8") };
 };
+
+
+export const localTimestamp = () => {
+  const now = new Date();
+  const timestamp = getUnixTime(now);
+  return { value: timestamp.toString() }
+}
+
+export const localDateISO8601 = () => {
+  const now = new Date()
+  return { value: formatISO(now) }
+}

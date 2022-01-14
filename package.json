@@ -8,14 +8,14 @@
   "commands": [
     {
       "name": "index",
-      "title": "Developer Utilities",
-      "description": "Template for showing a static list and a detail view",
+      "title": "Developer Toolbox",
+      "description": "A collection of utils frequently used in daily development.",
       "mode": "view"
     }
   ],
   "dependencies": {
     "@raycast/api": "^1.27.0",
-    "clipboardy": "^3.0.0",
+    "date-fns": "^2.28.0",
     "run-applescript": "^6.0.0"
   },
   "devDependencies": {
