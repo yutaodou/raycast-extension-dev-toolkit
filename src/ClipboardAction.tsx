@@ -20,12 +20,21 @@ export default ({
 }) => {
   return (
     <ActionPanel>
-      <PushAction title={title} target={<ActionResultView action={action} />} />
+      <PushAction
+        title={title}
+        target={<ActionResultView title={title} action={action} />}
+      />
     </ActionPanel>
   );
 };
 
-const ActionResultView = ({ action }: { action: ClipboardActionType }) => {
+const ActionResultView = ({
+  action,
+  title,
+}: {
+  action: ClipboardActionType;
+  title: string;
+}) => {
   const [result, setResult] = useState<ActionResult>({ value: "" });
 
   useEffect(() => {
@@ -54,5 +63,11 @@ const ActionResultView = ({ action }: { action: ClipboardActionType }) => {
     </ActionPanel>
   );
 
-  return <Detail markdown={result?.value || ""} actions={actions} />;
+  return (
+    <Detail
+      navigationTitle={title}
+      markdown={result?.value || ""}
+      actions={actions}
+    />
+  );
 };

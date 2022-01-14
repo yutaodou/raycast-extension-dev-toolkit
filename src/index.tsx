@@ -11,14 +11,14 @@ export default function Command() {
           icon="list-icon.png"
           title="Base64 Encode"
           subtitle="Base64 encode text from clipboard"
-          actions={<ClipboardAction title="Encoded" action={base64Encode} />}
+          actions={<ClipboardAction title="Base64 Encoded" action={base64Encode} />}
         />
         <List.Item
           key="2"
           icon="list-icon.png"
           title="Base64 Decode"
           subtitle="Base64 decode text from clipboard"
-          actions={<ClipboardAction title="Decoded" action={base64Decode} />}
+          actions={<ClipboardAction title="Base64 Decoded" action={base64Decode} />}
         />
       </List.Section>
 
@@ -35,14 +35,14 @@ export default function Command() {
           icon="list-icon.png"
           title="Local Date"
           subtitle="Return local date in ISO8601 format"
-          actions={<ClipboardAction title="Timestamp" action={localDateISO8601} />}
+          actions={<ClipboardAction title="Local Date" action={localDateISO8601} />}
         />
         <List.Item
           key="5"
           icon="list-icon.png"
           title="Timestamp to Date"
           subtitle="Convert timestam to date and return in ISO8601 format"
-          actions={<ClipboardAction title="Timestamp" action={timestampToDateString} />}
+          actions={<ClipboardAction title="Timestamp to Date" action={timestampToDateString} />}
         />
       </List.Section>
     </List>
