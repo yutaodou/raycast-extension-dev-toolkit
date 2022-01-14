@@ -1,6 +1,7 @@
-# Devlopment Toolkit
+# Developer Toolkit
 
 A collection of development utilities.
+
 - Base64 encode
 - Base64 decode
 - Local timestamp
@@ -10,7 +11,3 @@ A collection of development utilities.
 - Minisize json
 - IP address
 - UUID
-
-## Installation
-1. Raycast store
-2. Source code
