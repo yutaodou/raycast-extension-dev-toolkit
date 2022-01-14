@@ -1,4 +1,6 @@
-import { ActionPanel, Detail, List, PushAction } from "@raycast/api";
+import { List } from "@raycast/api";
+import { base64Decode, base64Encode } from "./actions";
+import ClipboardAction from "./ClipboardAction";
 
 export default function Command() {
   return (
@@ -6,12 +8,14 @@ export default function Command() {
       <List.Item
         key="1"
         icon="list-icon.png"
-        title="Greeting"
-        actions={
-          <ActionPanel>
-            <PushAction title="Show Details" target={<Detail markdown="# Hey!! 👋" />} />
-          </ActionPanel>
-        }
+        title="Base64 Encode"
+        actions={<ClipboardAction title="Encoded" action={base64Encode} />}
+      />
+      <List.Item
+        key="2"
+        icon="list-icon.png"
+        title="Base64 Decode"
+        actions={<ClipboardAction title="Decoded" action={base64Decode} />}
       />
     </List>
   );

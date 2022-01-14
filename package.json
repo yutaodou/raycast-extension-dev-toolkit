@@ -1,29 +1,37 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "dev-utils",
-  "title": "dev-utils",
-  "description": "A collection of utils to frequently used in daily development.",
+  "title": "Developer Utilities",
+  "description": "A collection of utils  frequently used in daily development.",
   "icon": "command-icon.png",
   "author": "dytes",
   "license": "MIT",
   "commands": [
     {
       "name": "index",
-      "title": "Show List and Detail",
+      "title": "Developer Utilities",
       "description": "Template for showing a static list and a detail view",
       "mode": "view"
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.27.0"
+    "@raycast/api": "^1.27.0",
+    "clipboardy": "^3.0.0",
+    "run-applescript": "^6.0.0"
   },
   "devDependencies": {
+    "@types/execa": "^2.0.0",
     "@types/node": "~16.10.0",
     "@types/react": "^17.0.28",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.28.0",
     "react-devtools": "^4.19.2",
     "typescript": "^4.4.3"
   },
