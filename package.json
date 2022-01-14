@@ -1,8 +1,7 @@
 {
-  "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "dev-utils",
-  "title": "Developer Utilities",
-  "description": "A collection of utils  frequently used in daily development.",
+  "name": "dev-toolbox",
+  "title": "Developer Toolbox",
+  "description": "A collection of utils frequently used in daily development.",
   "icon": "command-icon.png",
   "author": "dytes",
   "license": "MIT",
