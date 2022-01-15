@@ -54,3 +54,19 @@ export const minifyJSON = (input: string): ActionResult => {
     return { error: Error("Invalid JSON input") };
   }
 };
+
+export const encodeURL = (url: string): ActionResult => {
+  try {
+    return { value: encodeURI(url) };
+  } catch {
+    return { error: Error("Invalid URL") };
+  }
+};
+
+export const decodeURL = (url: string): ActionResult => {
+  try {
+    return { value: decodeURI(url) };
+  } catch {
+    return { error: Error("Invalid URL") };
+  }
+};

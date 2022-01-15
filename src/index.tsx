@@ -2,6 +2,8 @@ import { List } from "@raycast/api";
 import {
   base64Decode,
   base64Encode,
+  decodeURL,
+  encodeURL,
   localDateISO8601,
   localTimestamp,
   minifyJSON,
@@ -20,7 +22,7 @@ export default function Command() {
           title="Base64 Encode"
           subtitle="Base64 encode text from clipboard"
           actions={
-            <ClipboardAction title="Base64 Encoded" action={base64Encode} />
+            <ClipboardAction title="Base64 Encode" action={base64Encode} />
           }
         />
         <List.Item
@@ -31,6 +33,20 @@ export default function Command() {
           actions={
             <ClipboardAction title="Base64 Decoded" action={base64Decode} />
           }
+        />
+        <List.Item
+          key="7"
+          icon="list-icon.png"
+          title="URL Encode"
+          subtitle="URL encode text from clipboard"
+          actions={<ClipboardAction title="URL Encode" action={encodeURL} />}
+        />
+        <List.Item
+          key="8"
+          icon="list-icon.png"
+          title="URL Decode"
+          subtitle="URL decode text from clipboard"
+          actions={<ClipboardAction title="URL Decode" action={decodeURL} />}
         />
       </List.Section>
 
