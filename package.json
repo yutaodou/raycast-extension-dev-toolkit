@@ -1,7 +1,7 @@
 {
   "name": "dev-toolbox",
   "title": "Developer Toolbox",
-  "description": "A collection of utils frequently used in daily development.",
+  "description": "A collection of utils commonly used in daily development.",
   "icon": "command-icon.png",
   "author": "dytes",
   "license": "MIT",
@@ -9,7 +9,7 @@
     {
       "name": "index",
       "title": "Developer Toolbox",
-      "description": "A collection of utils frequently used in daily development.",
+      "description": "A collection of utils commonly used in daily development.",
       "mode": "view"
     }
   ],
@@ -19,7 +19,6 @@
     "run-applescript": "^6.0.0"
   },
   "devDependencies": {
-    "@types/execa": "^2.0.0",
     "@types/node": "~16.10.0",
     "@types/react": "^17.0.28",
     "@typescript-eslint/eslint-plugin": "^5.9.1",

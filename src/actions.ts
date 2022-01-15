@@ -3,8 +3,7 @@ import getUnixTime from "date-fns/getUnixTime";
 import toDate from "date-fns/toDate";
 
 export type ActionResult = {
-  value?: any;
-  json?: object;
+  value?: string;
   error?: Error;
 };
 
@@ -41,7 +40,7 @@ export const timestampToDateString = (input: string): ActionResult => {
 export const prettifyJSON = (input: string): ActionResult => {
   try {
     const parsed = JSON.parse(input);
-    return { json: parsed };
+    return { value: JSON.stringify(parsed, null, 4) };
   } catch {
     return { error: Error("Invalid JSON input") };
   }

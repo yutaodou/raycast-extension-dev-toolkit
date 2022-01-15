@@ -1,5 +1,6 @@
 import {
   ActionPanel,
+  ActionPanelItem,
   CopyToClipboardAction,
   Detail,
   PushAction,
@@ -10,36 +11,22 @@ import { ActionResult } from "./actions";
 import { readFromClipboard } from "./utils";
 
 export type ClipboardActionType = (input: string) => ActionResult;
+export type OutputType = "show" | "copyToClipboard";
 
 export default ({
   title,
   action,
+  outputType = "show",
 }: {
   title: string;
   action: ClipboardActionType;
-}) => {
-  return (
-    <ActionPanel>
-      <PushAction
-        title={title}
-        target={<ActionResultView title={title} action={action} />}
-      />
-    </ActionPanel>
-  );
-};
-
-const ActionResultView = ({
-  action,
-  title,
-}: {
-  action: ClipboardActionType;
-  title: string;
+  outputType?: OutputType;
 }) => {
   const [result, setResult] = useState<ActionResult>({ value: "" });
 
   useEffect(() => {
     performAction();
-  }, []);
+  });
 
   const performAction = async () => {
     const input = await readFromClipboard();
@@ -49,25 +36,53 @@ const ActionResultView = ({
     }
     const result = action(input);
     setResult(result);
-
-    console.log(result);
-    if (result?.error) {
-      await showHUD(result?.error.message);
-      return null;
-    }
   };
 
-  const actions = (
+  const handleError = async () => {
+    if (!result?.error) {
+      return;
+    }
+
+    await showHUD(result.error.message);
+  };
+
+  return (
     <ActionPanel>
-      <CopyToClipboardAction content={result?.value || ""} />
+      {!result?.error && outputType === "show" && (
+        <PushAction
+          title={title}
+          target={<DetailView title={title} result={result} />}
+        />
+      )}
+
+      {!result?.error && outputType === "copyToClipboard" && (
+        <CopyToClipboardAction title={title} content={result.value} />
+      )}
+
+      {result?.error && (
+        <ActionPanelItem title={title} onAction={handleError} />
+      )}
     </ActionPanel>
   );
+};
 
+const DetailView = ({
+  result,
+  title,
+}: {
+  result: ActionResult;
+  title: string;
+}) => {
+  const content = result.value || "";
   return (
     <Detail
       navigationTitle={title}
-      markdown={result?.value || ""}
-      actions={actions}
+      markdown={content}
+      actions={
+        <ActionPanel>
+          <CopyToClipboardAction content={content} />
+        </ActionPanel>
+      }
     />
   );
 };

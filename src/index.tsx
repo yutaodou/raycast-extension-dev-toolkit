@@ -73,15 +73,25 @@ export default function Command() {
           title="Prettify JSON"
           subtitle="Pretty JSON text from clipboard"
           actions={
-            <ClipboardAction title="Pretty JSON" action={prettifyJSON} />
+            <ClipboardAction
+              title="Prettify JSON"
+              action={prettifyJSON}
+              outputType="copyToClipboard"
+            />
           }
         />
         <List.Item
-          key="5"
+          key="6"
           icon="list-icon.png"
           title="Minify JSON"
           subtitle="Minify JSON text from clipboard"
-          actions={<ClipboardAction title="Minify JSON" action={minifyJSON} />}
+          actions={
+            <ClipboardAction
+              title="Minify JSON"
+              action={minifyJSON}
+              outputType="copyToClipboard"
+            />
+          }
         />
       </List.Section>
     </List>
