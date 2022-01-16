@@ -56,7 +56,7 @@ export default ({
       )}
 
       {!result?.error && outputType === "copyToClipboard" && (
-        <CopyToClipboardAction title={title} content={result.value} />
+        <CopyToClipboardAction title={title} content={result.value || ""} />
       )}
 
       {result?.error && (

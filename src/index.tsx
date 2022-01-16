@@ -87,7 +87,7 @@ export default function Command() {
           key="5"
           icon="list-icon.png"
           title="Prettify JSON"
-          subtitle="Pretty JSON text from clipboard"
+          subtitle="Prettify JSON text from clipboard"
           actions={
             <ClipboardAction
               title="Prettify JSON"
