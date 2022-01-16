@@ -9,5 +9,3 @@ A collection of development utilities.
 - Timestamp to Date
 - Prettify json
 - Minisize json
-- IP address
-- UUID
