@@ -1,6 +1,6 @@
 # Developer Toolkit
 
-A collection of development utilities.
+A collection of development utilities:
 
 - Base64 encode
 - Base64 decode
