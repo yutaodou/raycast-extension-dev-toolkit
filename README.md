@@ -9,3 +9,10 @@ A collection of development utilities:
 - Timestamp to Date
 - Prettify json
 - Minisize json
+
+## Install
+
+```
+yarn install
+yarn dev
+```
