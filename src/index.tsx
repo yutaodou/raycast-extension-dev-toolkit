@@ -2,6 +2,7 @@ import { List } from "@raycast/api";
 import {
   base64Decode,
   base64Encode,
+  decodeJWT,
   decodeURL,
   encodeURL,
   localDateISO8601,
@@ -47,6 +48,13 @@ export default function Command() {
           title="URL Decode"
           subtitle="URL decode text from clipboard"
           actions={<ClipboardAction title="URL Decode" action={decodeURL} />}
+        />
+        <List.Item
+          key="9"
+          icon="list-icon.png"
+          title="JWT Decode"
+          subtitle="Decode JWT token from clipboard"
+          actions={<ClipboardAction title="JWT Decode" action={decodeJWT} />}
         />
       </List.Section>
 

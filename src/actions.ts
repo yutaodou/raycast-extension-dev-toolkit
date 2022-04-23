@@ -1,6 +1,7 @@
 import formatISO from "date-fns/formatISO";
 import getUnixTime from "date-fns/getUnixTime";
 import toDate from "date-fns/toDate";
+import jwt from "jsonwebtoken";
 
 export type ActionResult = {
   value?: string;
@@ -68,5 +69,18 @@ export const decodeURL = (url: string): ActionResult => {
     return { value: decodeURI(url) };
   } catch {
     return { error: Error("Invalid URL") };
+  }
+};
+
+export const decodeJWT = (token: string): ActionResult => {
+  try {
+    if (!token) {
+      return { value: "" };
+    }
+
+    const decoded = jwt.decode(token);
+    return { value: JSON.stringify(decoded, null, 4) };
+  } catch {
+    return { error: Error("Invalid JWT") };
   }
 };
