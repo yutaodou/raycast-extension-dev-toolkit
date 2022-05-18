@@ -81,7 +81,7 @@ export default function Command() {
           key="5"
           icon="list-icon.png"
           title="Timestamp to Date"
-          subtitle="Convert timestam to date and return in ISO8601 format"
+          subtitle="Convert timestamp to date and return in ISO8601 format"
           actions={
             <ClipboardAction
               title="Timestamp to Date"

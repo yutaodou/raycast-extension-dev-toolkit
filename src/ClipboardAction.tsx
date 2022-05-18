@@ -1,11 +1,4 @@
-import {
-  ActionPanel,
-  ActionPanelItem,
-  CopyToClipboardAction,
-  Detail,
-  PushAction,
-  showHUD,
-} from "@raycast/api";
+import { Action, ActionPanel, Detail, showHUD } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { ActionResult } from "./actions";
 import { readFromClipboard } from "./utils";
@@ -25,7 +18,7 @@ export default ({
   const [result, setResult] = useState<ActionResult>({ value: "" });
 
   useEffect(() => {
-    performAction();
+    performAction().catch(console.log);
   });
 
   const performAction = async () => {
@@ -49,19 +42,17 @@ export default ({
   return (
     <ActionPanel>
       {!result?.error && outputType === "show" && (
-        <PushAction
+        <Action.Push
           title={title}
           target={<DetailView title={title} result={result} />}
         />
       )}
 
       {!result?.error && outputType === "copyToClipboard" && (
-        <CopyToClipboardAction title={title} content={result.value || ""} />
+        <Action.CopyToClipboard title={title} content={result.value || ""} />
       )}
 
-      {result?.error && (
-        <ActionPanelItem title={title} onAction={handleError} />
-      )}
+      {result?.error && <Action title={title} onAction={handleError} />}
     </ActionPanel>
   );
 };
@@ -80,7 +71,7 @@ const DetailView = ({
       markdown={content}
       actions={
         <ActionPanel>
-          <CopyToClipboardAction content={content} />
+          <Action.CopyToClipboard content={content} />
         </ActionPanel>
       }
     />
