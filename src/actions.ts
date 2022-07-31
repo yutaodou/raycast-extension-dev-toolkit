@@ -31,10 +31,9 @@ export const localDateISO8601 = (): ActionResult => {
 
 export const timestampToDateString = (input: string): ActionResult => {
   try {
-    const miliseconds =
+    const milliseconds =
       input.length > 10 ? parseInt(input) : parseInt(input) * 1000;
-    const datetime = toDate(miliseconds);
-    return { value: formatISO(datetime) };
+    return { value: formatISO(toDate(milliseconds)) };
   } catch {
     return { error: Error("Invalid timestamp value") };
   }
