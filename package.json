@@ -5,6 +5,10 @@
   "icon": "command-icon.png",
   "author": "dytes",
   "license": "MIT",
+  "categories": [
+    "Developer Tools",
+    "Productivity"
+  ],
   "commands": [
     {
       "name": "index",
@@ -26,16 +30,17 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "~16.10.0",
     "@types/react": "^17.0.28",
-    "@typescript-eslint/eslint-plugin": "^5.9.1",
-    "@typescript-eslint/parser": "^5.9.1",
-    "eslint": "^7.32.0",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^25.3.4",
+    "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0",
-    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-react": "^7.31.8",
     "jest": "^27.4.7",
     "react-devtools": "^4.19.2",
     "typescript": "^4.4.3"
