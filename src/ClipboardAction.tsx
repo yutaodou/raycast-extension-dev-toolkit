@@ -1,37 +1,32 @@
 import { Action, ActionPanel, Detail, showHUD } from "@raycast/api";
-import { useEffect, useState } from "react";
 import { ActionResult } from "./actions";
-import { readFromClipboard } from "./utils";
+import { readFromClipboardSync } from "./utils";
 
-export type ClipboardActionType = (input: string) => ActionResult;
-export type OutputType = "show" | "copyToClipboard";
+export type Action = (input: string) => ActionResult;
 
-export default ({
-  title,
-  action,
-  outputType = "show",
-}: {
-  title: string;
-  action: ClipboardActionType;
-  outputType?: OutputType;
-}) => {
-  const [result, setResult] = useState<ActionResult>({ value: "" });
+export default ({ title, action }: { title: string; action: Action }) => {
+  console.log(`rendering ${title}`);
 
-  useEffect(() => {
-    performAction().catch(console.log);
-  });
+  return (
+    <ActionPanel>
+      <Action.Push
+        title={title}
+        target={<DetailView title={title} action={action} />}
+      />
+    </ActionPanel>
+  );
+};
 
-  const performAction = async () => {
-    const input = await readFromClipboard();
-    if (!input) {
-      setResult({ error: Error("Empty clipboard") });
-      return;
-    }
-    const result = action(input);
-    setResult(result);
+const DetailView = ({ action, title }: { action: Action; title: string }) => {
+  const process = (): ActionResult => {
+    const clipboard = readFromClipboardSync();
+    const result = clipboard
+      ? action(clipboard)
+      : { error: Error("Empty clipboard") };
+    return result;
   };
 
-  const handleError = async () => {
+  const handleError = async (result: ActionResult) => {
     if (!result?.error) {
       return;
     }
@@ -39,39 +34,20 @@ export default ({
     await showHUD(result.error.message);
   };
 
-  return (
-    <ActionPanel>
-      {!result?.error && outputType === "show" && (
-        <Action.Push
-          title={title}
-          target={<DetailView title={title} result={result} />}
-        />
-      )}
+  const result = process();
 
-      {!result?.error && outputType === "copyToClipboard" && (
-        <Action.CopyToClipboard title={title} content={result.value || ""} />
-      )}
-
-      {result?.error && <Action title={title} onAction={handleError} />}
-    </ActionPanel>
-  );
-};
-
-const DetailView = ({
-  result,
-  title,
-}: {
-  result: ActionResult;
-  title: string;
-}) => {
-  const content = result.value || "";
+  const content = result.error?.message ?? (result.value || "");
   return (
     <Detail
       navigationTitle={title}
       markdown={content}
       actions={
         <ActionPanel>
-          <Action.CopyToClipboard content={content} />
+          {!result?.error && <Action.CopyToClipboard content={content} />}
+
+          {result?.error && (
+            <Action title={title} onAction={() => handleError(result)} />
+          )}
         </ActionPanel>
       }
     />

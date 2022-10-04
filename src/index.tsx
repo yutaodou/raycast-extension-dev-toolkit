@@ -1,4 +1,4 @@
-import { List } from "@raycast/api";
+import { List } from "@raycast/api"
 import {
   base64Decode,
   base64Encode,
@@ -9,9 +9,9 @@ import {
   localTimestamp,
   minifyJSON,
   prettifyJSON,
-  timestampToDateString,
-} from "./actions";
-import ClipboardAction from "./ClipboardAction";
+  timestampToDateString
+} from "./actions"
+import ClipboardAction from "./ClipboardAction"
 
 export default function Command() {
   return (
@@ -32,7 +32,7 @@ export default function Command() {
           title="Base64 Decode"
           subtitle="Base64 decode text from clipboard"
           actions={
-            <ClipboardAction title="Base64 Decoded" action={base64Decode} />
+            <ClipboardAction title="Base64 Decode" action={base64Decode} />
           }
         />
         <List.Item
@@ -97,11 +97,7 @@ export default function Command() {
           title="Prettify JSON"
           subtitle="Prettify JSON text from clipboard"
           actions={
-            <ClipboardAction
-              title="Prettify JSON"
-              action={prettifyJSON}
-              outputType="copyToClipboard"
-            />
+            <ClipboardAction title="Prettify JSON" action={prettifyJSON} />
           }
         />
         <List.Item
@@ -109,13 +105,7 @@ export default function Command() {
           icon="list-icon.png"
           title="Minify JSON"
           subtitle="Minify JSON text from clipboard"
-          actions={
-            <ClipboardAction
-              title="Minify JSON"
-              action={minifyJSON}
-              outputType="copyToClipboard"
-            />
-          }
+          actions={<ClipboardAction title="Minify JSON" action={minifyJSON} />}
         />
       </List.Section>
     </List>

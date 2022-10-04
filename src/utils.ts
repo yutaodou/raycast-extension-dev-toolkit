@@ -1,5 +1,5 @@
-import { runAppleScript } from "run-applescript";
+import { runAppleScriptSync } from "run-applescript"
 
-export const readFromClipboard = async () => {
-  return await runAppleScript("the clipboard");
+export const readFromClipboardSync = () => {
+  return runAppleScriptSync("the clipboard");
 };
