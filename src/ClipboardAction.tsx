@@ -2,11 +2,9 @@ import { Action, ActionPanel, Detail, showHUD } from "@raycast/api";
 import { ActionResult } from "./actions";
 import { readFromClipboardSync } from "./utils";
 
-export type Action = (input: string) => ActionResult;
+import { ActionRun } from "./types";
 
-export default ({ title, action }: { title: string; action: Action }) => {
-  console.log(`rendering ${title}`);
-
+export default ({ title, action }: { title: string; action: ActionRun }) => {
   return (
     <ActionPanel>
       <Action.Push
@@ -17,7 +15,12 @@ export default ({ title, action }: { title: string; action: Action }) => {
   );
 };
 
-const DetailView = ({ action, title }: { action: Action; title: string }) => {
+type DetailViewProps = {
+  action: ActionRun;
+  title: string;
+};
+
+const DetailView = ({ action, title }: DetailViewProps) => {
   const process = (): ActionResult => {
     const clipboard = readFromClipboardSync();
     const result = clipboard
