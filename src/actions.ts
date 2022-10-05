@@ -8,12 +8,22 @@ export type ActionResult = {
   error?: Error;
 };
 
+const EMPTY_INPUT_ERROR = new Error("Empty input");
+
 export const base64Encode = (input: string): ActionResult => {
+  if (!input) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   const buffer = Buffer.from(input, "utf-8");
   return { value: buffer.toString("base64") };
 };
 
 export const base64Decode = (input: string): ActionResult => {
+  if (!input) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   const buffer = Buffer.from(input, "base64");
   return { value: buffer.toString("utf-8") };
 };
@@ -30,6 +40,10 @@ export const localDateISO8601 = (): ActionResult => {
 };
 
 export const timestampToDateString = (input: string): ActionResult => {
+  if (!input) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   try {
     const milliseconds =
       input.length > 10 ? parseInt(input) : parseInt(input) * 1000;
@@ -40,6 +54,10 @@ export const timestampToDateString = (input: string): ActionResult => {
 };
 
 export const prettifyJSON = (input: string): ActionResult => {
+  if (!input) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   try {
     const parsed = JSON.parse(input);
     return { value: JSON.stringify(parsed, null, 4) };
@@ -58,6 +76,10 @@ export const minifyJSON = (input: string): ActionResult => {
 };
 
 export const encodeURL = (url: string): ActionResult => {
+  if (!url) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   try {
     return { value: encodeURI(url) };
   } catch {
@@ -66,6 +88,10 @@ export const encodeURL = (url: string): ActionResult => {
 };
 
 export const decodeURL = (url: string): ActionResult => {
+  if (!url) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   try {
     return { value: decodeURI(url) };
   } catch {
@@ -74,6 +100,10 @@ export const decodeURL = (url: string): ActionResult => {
 };
 
 export const decodeJWT = (token: string): ActionResult => {
+  if (!token) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   try {
     if (!token) {
       return { value: "" };
