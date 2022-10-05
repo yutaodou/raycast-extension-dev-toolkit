@@ -11,10 +11,6 @@ export type ActionResult = {
 const EMPTY_INPUT_ERROR = new Error("Empty input");
 
 export const base64Encode = (input: string): ActionResult => {
-  if (!input) {
-    throw EMPTY_INPUT_ERROR;
-  }
-
   const buffer = Buffer.from(input, "utf-8");
   return { value: buffer.toString("base64") };
 };

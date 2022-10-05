@@ -1,4 +1,4 @@
-import { List } from "@raycast/api"
+import { List } from "@raycast/api";
 import {
   base64Decode,
   base64Encode,
@@ -9,9 +9,10 @@ import {
   localTimestamp,
   minifyJSON,
   prettifyJSON,
-  timestampToDateString
-} from "./actions"
-import ClipboardAction from "./ClipboardAction"
+  timestampToDateString,
+} from "./actions";
+import ClipboardAction from "./ClipboardAction";
+import { DetailView } from "./components";
 
 export default function Command() {
   return (
@@ -23,7 +24,11 @@ export default function Command() {
           title="Base64 Encode"
           subtitle="Base64 encode text from clipboard"
           actions={
-            <ClipboardAction title="Base64 Encode" action={base64Encode} />
+            <ClipboardAction
+              title="Base64 Encode"
+              action={base64Encode}
+              detail={DetailView}
+            />
           }
         />
         <List.Item

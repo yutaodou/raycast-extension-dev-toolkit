@@ -17,7 +17,7 @@ describe("actions", () => {
 
     it("should raise error if invalid URL given", () => {
       const result = decodeURL("http://www.baidu.com?query=20%");
-      expect(result.error.message).toEqual("Invalid URL");
+      expect(result.error?.message).toEqual("Invalid URL");
     });
   });
 });
