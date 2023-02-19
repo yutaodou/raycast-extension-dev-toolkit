@@ -20,7 +20,7 @@
   "dependencies": {
     "@raycast/api": "^1.39.3",
     "date-fns": "^2.29.3",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "run-applescript": "^6.0.0"
   },
   "devDependencies": {
