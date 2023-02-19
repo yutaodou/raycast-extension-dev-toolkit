@@ -6,9 +6,9 @@ A collection of development utilities:
 
   - Base64 encode
   - Base64 decode
-  - JWT decode
   - URL encode
   - URL decode
+  - JWT decode
 
 - Date & Time
 
@@ -16,9 +16,10 @@ A collection of development utilities:
   - Local Date
   - Timestamp to Date
 
-- JSON
+- Format
   - Prettify json
   - Minimize json
+  - Generate UUID
 
 ## Install
 
