@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Form } from "@raycast/api";
 import { useState } from "react";
 import { ActionResult, ActionRun } from "../types";
-import { readFromClipboardSync } from "../utils";
+import { isFailure, isSuccess, readFromClipboardSync } from "../utils";
 
 export default ({ title, action }: { title: string; action: ActionRun }) => {
   const [result, setResult] = useState<ActionResult>({ value: "" });
@@ -10,8 +10,8 @@ export default ({ title, action }: { title: string; action: ActionRun }) => {
     <Form
       actions={
         <ActionPanel>
-          {!result?.error && (
-            <Action.CopyToClipboard content={result?.value ?? ""} />
+          {isSuccess(result) && (
+            <Action.CopyToClipboard content={result.value} />
           )}
         </ActionPanel>
       }
@@ -28,7 +28,7 @@ export default ({ title, action }: { title: string; action: ActionRun }) => {
       />
       <Form.Description
         title="Output"
-        text={result?.error?.message ?? result?.value ?? ""}
+        text={isFailure(result) ? result.error.message : result?.value}
       />
     </Form>
   );

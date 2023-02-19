@@ -3,11 +3,7 @@ import formatISO from "date-fns/formatISO";
 import getUnixTime from "date-fns/getUnixTime";
 import toDate from "date-fns/toDate";
 import jwt from "jsonwebtoken";
-
-export type ActionResult = {
-  value?: string;
-  error?: Error;
-};
+import { ActionResult } from "./types";
 
 const EMPTY_INPUT_ERROR = new Error("Empty input");
 

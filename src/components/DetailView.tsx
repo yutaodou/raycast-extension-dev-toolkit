@@ -1,8 +1,6 @@
 import { Action, ActionPanel, Detail, showHUD } from "@raycast/api";
-import { ActionResult } from "../actions";
-import { readFromClipboardSync } from "../utils";
-
-import { ActionRun } from "../types";
+import { ActionResult, ActionRun } from "../types";
+import { isFailure, isSuccess, readFromClipboardSync } from "../utils";
 
 type DetailViewProps = {
   action: ActionRun;
@@ -15,27 +13,19 @@ export default ({ action, title }: DetailViewProps) => {
     return action(clipboard);
   };
 
-  const handleError = async (result: ActionResult) => {
-    if (!result?.error) {
-      return;
-    }
-
-    await showHUD(result.error.message);
-  };
-
   const result = process();
+  const content = isSuccess(result) ? result.value : "";
 
-  const content = result.error?.message ?? (result.value || "");
   return (
     <Detail
       navigationTitle={title}
       markdown={content}
       actions={
         <ActionPanel>
-          {!result?.error && <Action.CopyToClipboard content={content} />}
+          {isSuccess(result) && <Action.CopyToClipboard content={result.value} />}
 
-          {result?.error && (
-            <Action title={title} onAction={() => handleError(result)} />
+          {isFailure(result) && (
+            <Action title={title} onAction={async () => await showHUD(result.error.message)} />
           )}
         </ActionPanel>
       }
