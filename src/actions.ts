@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import formatISO from "date-fns/formatISO";
 import getUnixTime from "date-fns/getUnixTime";
 import toDate from "date-fns/toDate";
@@ -110,4 +111,8 @@ export const decodeJWT = (token: string): ActionResult => {
   } catch {
     return { error: Error("Invalid JWT") };
   }
+};
+
+export const generateUUID = (): ActionResult => {
+  return { value: randomUUID() };
 };

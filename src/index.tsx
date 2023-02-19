@@ -10,6 +10,7 @@ import {
   minifyJSON,
   prettifyJSON,
   timestampToDateString,
+  generateUUID
 } from "./actions";
 import ClipboardAction from "./ClipboardAction";
 import { DetailView } from "./components";
@@ -113,6 +114,13 @@ export default function Command() {
           actions={<ClipboardAction title="Minify JSON" action={minifyJSON} />}
         />
       </List.Section>
+      <List.Item
+        key="7"
+        icon="list-icon.png"
+        title="UUID"
+        subtitle="Generate UUID"
+        actions={<ClipboardAction title="UUID" action={generateUUID} />}
+      />
     </List>
   );
 }
