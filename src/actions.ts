@@ -1,5 +1,4 @@
 import { randomUUID } from "crypto";
-import { getMilliseconds } from "date-fns";
 import formatISO from "date-fns/formatISO";
 import getUnixTime from "date-fns/getUnixTime";
 import toDate from "date-fns/toDate";
@@ -8,9 +7,17 @@ import { ActionResult } from "./types";
 
 const EMPTY_INPUT_ERROR = new Error("Empty input");
 
+const stringResult = (value: string): ActionResult => {
+  return { type: "string", value };
+};
+
 export const base64Encode = (input: string): ActionResult => {
+  if (!input) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
   const buffer = Buffer.from(input, "utf-8");
-  return { value: buffer.toString("base64") };
+  return stringResult(buffer.toString("base64"));
 };
 
 export const base64Decode = (input: string): ActionResult => {
@@ -19,23 +26,23 @@ export const base64Decode = (input: string): ActionResult => {
   }
 
   const buffer = Buffer.from(input, "base64");
-  return { value: buffer.toString("utf-8") };
+  return stringResult(buffer.toString("utf-8"));
 };
 
 export const localTimestamp = (): ActionResult => {
   const now = new Date();
   const timestamp = getUnixTime(now);
-  return { value: timestamp.toString() };
+  return stringResult(timestamp.toString());
 };
 
 export const localTimestampInMilliseconds = (): ActionResult => {
   const now = new Date();
-  return { value: now.getTime().toString() };
+  return stringResult(now.getTime().toString());
 };
 
 export const localDateISO8601 = (): ActionResult => {
   const now = new Date();
-  return { value: formatISO(now) };
+  return stringResult(formatISO(now));
 };
 
 export const timestampToDateString = (input: string): ActionResult => {
@@ -46,7 +53,7 @@ export const timestampToDateString = (input: string): ActionResult => {
   try {
     const milliseconds =
       input.length > 10 ? parseInt(input) : parseInt(input) * 1000;
-    return { value: formatISO(toDate(milliseconds)) };
+    return stringResult(formatISO(toDate(milliseconds)));
   } catch {
     return { error: Error("Invalid timestamp value") };
   }
@@ -59,7 +66,7 @@ export const prettifyJSON = (input: string): ActionResult => {
 
   try {
     const parsed = JSON.parse(input);
-    return { value: JSON.stringify(parsed, null, 4) };
+    return { value: JSON.stringify(parsed, null, 4), type: "code" };
   } catch {
     return { error: Error("Invalid JSON input") };
   }
@@ -68,7 +75,7 @@ export const prettifyJSON = (input: string): ActionResult => {
 export const minifyJSON = (input: string): ActionResult => {
   try {
     const parsed = JSON.parse(input);
-    return { value: JSON.stringify(parsed) };
+    return { value: JSON.stringify(parsed), type: "code" };
   } catch {
     return { error: Error("Invalid JSON input") };
   }
@@ -80,7 +87,7 @@ export const encodeURL = (url: string): ActionResult => {
   }
 
   try {
-    return { value: encodeURI(url) };
+    return stringResult(encodeURI(url));
   } catch {
     return { error: Error("Invalid URL") };
   }
@@ -92,7 +99,7 @@ export const decodeURL = (url: string): ActionResult => {
   }
 
   try {
-    return { value: decodeURI(url) };
+    return stringResult(decodeURI(url));
   } catch {
     return { error: Error("Invalid URL") };
   }
@@ -103,18 +110,12 @@ export const decodeJWT = (token: string): ActionResult => {
     throw EMPTY_INPUT_ERROR;
   }
 
-  try {
-    if (!token) {
-      return { value: "" };
-    }
-
-    const decoded = jwt.decode(token);
-    return { value: JSON.stringify(decoded, null, 4) };
-  } catch {
-    return { error: Error("Invalid JWT") };
-  }
+  const decoded = jwt.decode(token);
+  return decoded
+    ? { value: JSON.stringify(decoded, null, 4), type: "code" }
+    : { error: Error("Invalid JWT token") };
 };
 
 export const generateUUID = (): ActionResult => {
-  return { value: randomUUID() };
+  return stringResult(randomUUID());
 };

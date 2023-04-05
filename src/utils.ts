@@ -12,3 +12,12 @@ export function isSuccess(result: ActionResult): result is Success {
 export function isFailure(result: ActionResult): result is Failure {
   return (result as Failure).error !== undefined;
 }
+
+export function markdown(result: ActionResult): string {
+  if (isFailure(result)) {
+    return "";
+  }
+
+  const { value, type = "string" } = result;
+  return type === "string" ? value : "```\n" + value + "\n```";
+}
