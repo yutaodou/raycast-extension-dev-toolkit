@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import { getMilliseconds } from "date-fns";
 import formatISO from "date-fns/formatISO";
 import getUnixTime from "date-fns/getUnixTime";
 import toDate from "date-fns/toDate";
@@ -25,6 +26,11 @@ export const localTimestamp = (): ActionResult => {
   const now = new Date();
   const timestamp = getUnixTime(now);
   return { value: timestamp.toString() };
+};
+
+export const localTimestampInMilliseconds = (): ActionResult => {
+  const now = new Date();
+  return { value: now.getTime().toString() };
 };
 
 export const localDateISO8601 = (): ActionResult => {

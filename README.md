@@ -12,7 +12,8 @@ A collection of development utilities:
 
 - Date & Time
 
-  - Local timestamp
+  - Timestamp in seconds
+  - Timestamp in milliseconds
   - Local Date
   - Timestamp to Date
 

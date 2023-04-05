@@ -5,35 +5,31 @@ import {
   decodeJWT,
   decodeURL,
   encodeURL,
+  generateUUID,
   localDateISO8601,
   localTimestamp,
+  localTimestampInMilliseconds,
   minifyJSON,
   prettifyJSON,
   timestampToDateString,
-  generateUUID
 } from "./actions";
 import ClipboardAction from "./ClipboardAction";
-import { DetailView } from "./components";
 
 export default function Command() {
   return (
     <List>
       <List.Section title="Encode/Decode">
         <List.Item
-          key="1"
+          key="base64Encode"
           icon="list-icon.png"
           title="Base64 Encode"
           subtitle="Base64 encode text from clipboard"
           actions={
-            <ClipboardAction
-              title="Base64 Encode"
-              action={base64Encode}
-              detail={DetailView}
-            />
+            <ClipboardAction title="Base64 Encode" action={base64Encode} />
           }
         />
         <List.Item
-          key="2"
+          key="base64Decode"
           icon="list-icon.png"
           title="Base64 Decode"
           subtitle="Base64 decode text from clipboard"
@@ -42,21 +38,21 @@ export default function Command() {
           }
         />
         <List.Item
-          key="7"
+          key="urlEncode"
           icon="list-icon.png"
           title="URL Encode"
           subtitle="URL encode text from clipboard"
           actions={<ClipboardAction title="URL Encode" action={encodeURL} />}
         />
         <List.Item
-          key="8"
+          key="urlDecode"
           icon="list-icon.png"
           title="URL Decode"
           subtitle="URL decode text from clipboard"
           actions={<ClipboardAction title="URL Decode" action={decodeURL} />}
         />
         <List.Item
-          key="9"
+          key="jwtDecode"
           icon="list-icon.png"
           title="JWT Decode"
           subtitle="Decode JWT token from clipboard"
@@ -66,16 +62,28 @@ export default function Command() {
 
       <List.Section title="Date">
         <List.Item
-          key="3"
+          key="timestampInSeconds"
           icon="list-icon.png"
           title="Timestamp"
-          subtitle="Return the time in seconds since the epoch as a floating point number. "
+          subtitle="Return the timestamp in seconds since the epoch "
           actions={
             <ClipboardAction title="Timestamp" action={localTimestamp} />
           }
         />
         <List.Item
-          key="4"
+          key="localTimestampInMilliseconds"
+          icon="list-icon.png"
+          title="Timestamp in milliseconds"
+          subtitle="Return the timestamp in milliseconds since the epoch"
+          actions={
+            <ClipboardAction
+              title="Timestamp in milliseconds"
+              action={localTimestampInMilliseconds}
+            />
+          }
+        />
+        <List.Item
+          key="localDateISO8601"
           icon="list-icon.png"
           title="Local Date"
           subtitle="Return local date in ISO8601 format"
@@ -84,7 +92,7 @@ export default function Command() {
           }
         />
         <List.Item
-          key="5"
+          key="timestampToDateString"
           icon="list-icon.png"
           title="Timestamp to Date"
           subtitle="Convert timestamp to date and return in ISO8601 format"
@@ -98,7 +106,7 @@ export default function Command() {
       </List.Section>
       <List.Section title="Format">
         <List.Item
-          key="5"
+          key="prettifyJSON"
           icon="list-icon.png"
           title="Prettify JSON"
           subtitle="Prettify JSON text from clipboard"
@@ -107,7 +115,7 @@ export default function Command() {
           }
         />
         <List.Item
-          key="6"
+          key="minifyJSON"
           icon="list-icon.png"
           title="Minify JSON"
           subtitle="Minify JSON text from clipboard"
@@ -115,7 +123,7 @@ export default function Command() {
         />
       </List.Section>
       <List.Item
-        key="7"
+        key="generateUUID"
         icon="list-icon.png"
         title="UUID"
         subtitle="Generate UUID"
