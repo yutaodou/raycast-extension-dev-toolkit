@@ -1,3 +1,5 @@
+[:coffee: Get me a coffee](https://www.buymeacoffee.com/yutaodou) if you like this plugin!
+
 # Developer Toolkit
 
 A collection of development utilities:
