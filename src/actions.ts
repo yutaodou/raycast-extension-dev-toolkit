@@ -51,8 +51,7 @@ export const timestampToDateString = (input: string): ActionResult => {
   }
 
   try {
-    const milliseconds =
-      input.length > 10 ? parseInt(input) : parseInt(input) * 1000;
+    const milliseconds = input.length > 10 ? parseInt(input) : parseInt(input) * 1000;
     return stringResult(formatISO(toDate(milliseconds)));
   } catch {
     return { error: Error("Invalid timestamp value") };
@@ -81,25 +80,33 @@ export const minifyJSON = (input: string): ActionResult => {
   }
 };
 
-export const encodeURL = (url: string): ActionResult => {
-  if (!url) {
+export const encodeURL = (input: string): ActionResult => {
+  if (!input) {
     throw EMPTY_INPUT_ERROR;
   }
 
   try {
-    return stringResult(encodeURI(url));
+    const url = new URL(input);
+    const searchParams: string[] = [];
+    url.searchParams.forEach((value: string, key: string) => {
+      searchParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+    });
+
+    return stringResult(`${url.origin}${url.pathname}${searchParams.length > 0 ? "?" + searchParams.join("&") : ""}`);
   } catch {
     return { error: Error("Invalid URL") };
   }
 };
 
-export const decodeURL = (url: string): ActionResult => {
-  if (!url) {
+export const decodeURL = (input: string): ActionResult => {
+  if (!input) {
     throw EMPTY_INPUT_ERROR;
   }
 
   try {
-    return stringResult(decodeURI(url));
+    const url = new URL(input);
+
+    return stringResult(`${url.origin}${url.pathname}${decodeURIComponent(url.search)}`);
   } catch {
     return { error: Error("Invalid URL") };
   }
@@ -111,9 +118,7 @@ export const decodeJWT = (token: string): ActionResult => {
   }
 
   const decoded = jwt.decode(token);
-  return decoded
-    ? { value: JSON.stringify(decoded, null, 4), type: "code" }
-    : { error: Error("Invalid JWT token") };
+  return decoded ? { value: JSON.stringify(decoded, null, 4), type: "code" } : { error: Error("Invalid JWT token") };
 };
 
 export const generateUUID = (): ActionResult => {
