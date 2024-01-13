@@ -45,16 +45,27 @@ export const localDateISO8601 = (): ActionResult => {
   return stringResult(formatISO(now));
 };
 
-export const timestampToDateString = (input: string): ActionResult => {
+export const timestampMillisecondToDateString = (input: string): ActionResult => {
   if (!input) {
     throw EMPTY_INPUT_ERROR;
   }
 
   try {
-    const milliseconds = input.length > 10 ? parseInt(input) : parseInt(input) * 1000;
-    return stringResult(formatISO(toDate(milliseconds)));
+    return stringResult(formatISO(toDate(parseInt(input))));
   } catch {
-    return { error: Error("Invalid timestamp value") };
+    return { error: Error("Expect timestamp value in milliseconds") };
+  }
+};
+
+export const timestampSecondsToDateString = (input: string): ActionResult => {
+  if (!input) {
+    throw EMPTY_INPUT_ERROR;
+  }
+
+  try {
+     return stringResult(formatISO(toDate(parseInt(input) * 1000)));
+  } catch {
+    return { error: Error("Expect a timestamp value in seconds") };
   }
 };
 
@@ -124,3 +135,7 @@ export const decodeJWT = (token: string): ActionResult => {
 export const generateUUID = (): ActionResult => {
   return stringResult(randomUUID());
 };
+
+export const generateUUID2 = (): ActionResult => {
+  return stringResult(randomUUID());
+}

@@ -1,4 +1,4 @@
-import { List } from "@raycast/api";
+import {List} from "@raycast/api";
 import {
   base64Decode,
   base64Encode,
@@ -11,7 +11,8 @@ import {
   localTimestampInMilliseconds,
   minifyJSON,
   prettifyJSON,
-  timestampToDateString,
+  timestampSecondsToDateString,
+  timestampMillisecondToDateString
 } from "./actions";
 import ClipboardAction from "./ClipboardAction";
 
@@ -94,12 +95,24 @@ export default function Command() {
         <List.Item
           key="timestampToDateString"
           icon="list-icon.png"
-          title="Timestamp to Date"
-          subtitle="Convert timestamp to date and return in ISO8601 format"
+          title="Timestamp(second) to Date"
+          subtitle="Convert timestamp in second to date and return in ISO8601 format"
           actions={
             <ClipboardAction
-              title="Timestamp to Date"
-              action={timestampToDateString}
+              title="Timestamp(second) to Date"
+              action={timestampSecondsToDateString}
+            />
+          }
+        />
+        <List.Item
+          key="timestampMillisecondToDateString"
+          icon="list-icon.png"
+          title="Timestamp(millisecond) to Date"
+          subtitle="Convert timestamp in millisecond in second to date and return in ISO8601 format"
+          actions={
+            <ClipboardAction
+              title="Timestamp(millisecond) to Date"
+              action={timestampMillisecondToDateString}
             />
           }
         />
