@@ -1,9 +1,9 @@
-import { randomUUID } from "crypto";
-import formatISO from "date-fns/formatISO";
-import getUnixTime from "date-fns/getUnixTime";
-import toDate from "date-fns/toDate";
+import { randomUUID } from "node:crypto";
+import { formatISO } from "date-fns/formatISO";
+import { getUnixTime } from "date-fns/getUnixTime";
+import { toDate } from "date-fns/toDate";
 import jwt from "jsonwebtoken";
-import { ActionResult } from "./types";
+import type { ActionResult } from "./types";
 
 const EMPTY_INPUT_ERROR = new Error("Empty input");
 
@@ -51,7 +51,7 @@ export const timestampMillisecondToDateString = (input: string): ActionResult =>
   }
 
   try {
-    return stringResult(formatISO(toDate(parseInt(input))));
+    return stringResult(formatISO(toDate(Number.parseInt(input))));
   } catch {
     return { error: Error("Expect timestamp value in milliseconds") };
   }
@@ -63,7 +63,7 @@ export const timestampSecondsToDateString = (input: string): ActionResult => {
   }
 
   try {
-     return stringResult(formatISO(toDate(parseInt(input) * 1000)));
+    return stringResult(formatISO(toDate(Number.parseInt(input) * 1000)));
   } catch {
     return { error: Error("Expect a timestamp value in seconds") };
   }
@@ -103,7 +103,7 @@ export const encodeURL = (input: string): ActionResult => {
       searchParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
     });
 
-    return stringResult(`${url.origin}${url.pathname}${searchParams.length > 0 ? "?" + searchParams.join("&") : ""}`);
+    return stringResult(`${url.origin}${url.pathname}${searchParams.length > 0 ? `?${searchParams.join("&")}` : ""}`);
   } catch {
     return { error: Error("Invalid URL") };
   }
@@ -138,4 +138,4 @@ export const generateUUID = (): ActionResult => {
 
 export const generateUUID2 = (): ActionResult => {
   return stringResult(randomUUID());
-}
+};

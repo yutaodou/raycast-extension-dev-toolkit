@@ -1,5 +1,5 @@
 import { runAppleScriptSync } from "run-applescript";
-import { Success, ActionResult, Failure } from "./types";
+import type { ActionResult, Failure, Success } from "./types";
 
 export const readFromClipboardSync = () => {
   return runAppleScriptSync("the clipboard");
@@ -19,5 +19,5 @@ export function markdown(result: ActionResult): string {
   }
 
   const { value, type = "string" } = result;
-  return type === "string" ? value : "```\n" + value + "\n```";
+  return type === "string" ? value : `\`\`\`\n${value}\n\`\`\``;
 }

@@ -1,4 +1,5 @@
-import {List} from "@raycast/api";
+import { List } from "@raycast/api";
+import ClipboardAction from "./ClipboardAction";
 import {
   base64Decode,
   base64Encode,
@@ -11,10 +12,9 @@ import {
   localTimestampInMilliseconds,
   minifyJSON,
   prettifyJSON,
+  timestampMillisecondToDateString,
   timestampSecondsToDateString,
-  timestampMillisecondToDateString
 } from "./actions";
-import ClipboardAction from "./ClipboardAction";
 
 export default function Command() {
   return (

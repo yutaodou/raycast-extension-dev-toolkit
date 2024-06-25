@@ -1,10 +1,10 @@
 import { Action, ActionPanel, Form } from "@raycast/api";
 import { useState } from "react";
-import { ActionResult, ActionRun } from "../types";
+import type { ActionResult, ActionRun } from "../types";
 import { isFailure, isSuccess, readFromClipboardSync } from "../utils";
 
 export default ({ title, action }: { title: string; action: ActionRun }) => {
-  const [result, setResult] = useState<ActionResult>({ value: "" });
+  const [result, setResult] = useState<ActionResult>({ value: "", type: "string" });
 
   return (
     <Form

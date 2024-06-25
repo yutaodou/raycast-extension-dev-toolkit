@@ -1,10 +1,10 @@
 import { Action, ActionPanel, Detail, showHUD } from "@raycast/api";
-import { ActionResult, ActionRun } from "../types";
+import type { ActionResult, ActionRun } from "../types";
 import {
   isFailure,
   isSuccess,
-  readFromClipboardSync,
   markdown,
+  readFromClipboardSync,
 } from "../utils";
 
 type DetailViewProps = {
