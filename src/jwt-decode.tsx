@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Clipboard, Detail, showToast, Toast } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, closeMainWindow, Detail, showHUD } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { decodeJWT } from "./actions";
 import { markdown } from "./utils";
@@ -44,11 +44,9 @@ export default function Command() {
           <Action
             title="Copy JSON"
             onAction={async () => {
-              await Clipboard.copy(JSON.stringify(result, null, 2));
-              await showToast({
-                style: Toast.Style.Success,
-                title: "JWT copied to clipboard"
-              });
+              await Clipboard.copy(result);
+              await closeMainWindow();
+              await showHUD("JWT copied to clipboard");
             }}
           />
         </ActionPanel>

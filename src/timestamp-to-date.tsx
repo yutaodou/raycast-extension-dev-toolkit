@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Clipboard, Detail, showToast } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, closeMainWindow, Detail, popToRoot, showHUD, showToast } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { timestampSecondsToDateString } from "./actions";
 import { markdown } from "./utils";
@@ -44,12 +44,10 @@ export default function Command() {
         <ActionPanel>
           <Action
             title="Copy Converted Date"
-            onAction={() => {
-              Clipboard.copy(result);
-              await showToast({
-                style: Toast.Style.Success,
-                title: "Converted date copied to clipboard",
-              });
+            onAction={async () => {
+              await Clipboard.copy(result);
+              await closeMainWindow();
+              await showHUD("Copied to clipboard");
             }}
           />
         </ActionPanel>

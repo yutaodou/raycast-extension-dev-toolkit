@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Clipboard, Detail, showToast } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, closeMainWindow, Detail, showHUD, showToast } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { prettifyJSON } from "./actions";
 import { markdown } from "./utils";
@@ -46,23 +46,19 @@ export default function Command() {
         <ActionPanel>
           <Action
             title="Copy Prettified JSON"
-            onAction={() => {
-              Clipboard.copy(result);
-              await showToast({
-                style: Toast.Style.Success,
-                title: "Prettified JSON copied to clipboard",
-              });
+            onAction={async () => {
+              await Clipboard.copy(result);
+              await closeMainWindow();
+              await showHUD("Prettified JSON copied to clipboard");
             }}
           />
           {original && (
             <Action
               title="Copy Original JSON"
-              onAction={() => {
-                Clipboard.copy(original);
-                await showToast({
-                  style: Toast.Style.Success,
-                  title: "Original JSON copied to clipboard",
-                });
+              onAction={async () => {
+                await Clipboard.copy(original);
+                await closeMainWindow();
+                await showHUD("Original JSON copied to clipboard");
               }}
             />
           )}

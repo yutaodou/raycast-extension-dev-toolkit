@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Action, ActionPanel, Clipboard, Detail, showToast, Toast } from "@raycast/api";
+import { useEffect, useState } from "react";
+import { Action, ActionPanel, Clipboard, closeMainWindow, Detail, popToRoot, showHUD, showToast, Toast } from "@raycast/api";
 import { base64Encode } from "./actions";
 import { markdown } from "./utils";
 
@@ -48,24 +48,10 @@ export default function Command() {
             title="Copy Encoded Text"
             onAction={async () => {
               await Clipboard.copy(result);
-              await showToast({
-                style: Toast.Style.Success,
-                title: "Encoded text copied to clipboard"
-              });
+              await closeMainWindow();
+              await showHUD("Encoded text copied to clipboard");
             }}
           />
-          {original && (
-            <Action
-              title="Copy Original Text"
-              onAction={async () => {
-                await Clipboard.copy(original);
-                await showToast({
-                  style: Toast.Style.Success,
-                  title: "Original text copied to clipboard"
-                });
-              }}
-            />
-          )}
         </ActionPanel>
       }
     />

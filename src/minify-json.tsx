@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Action, ActionPanel, Clipboard, Detail, showToast, Toast } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Detail, showToast, Toast, popToRoot, closeMainWindow, showHUD } from "@raycast/api";
 import { minifyJSON } from "./actions";
 import { markdown } from "./utils";
 
@@ -48,10 +48,8 @@ export default function Command() {
             title="Copy Minified JSON"
             onAction={async () => {
               await Clipboard.copy(result);
-              await showToast({
-                style: Toast.Style.Success,
-                title: "Minified JSON copied to clipboard"
-              });
+              await closeMainWindow();
+              await showHUD("Minified JSON copied to clipboard");
             }}
           />
           {original && (
@@ -59,10 +57,8 @@ export default function Command() {
               title="Copy Original JSON"
               onAction={async () => {
                 await Clipboard.copy(original);
-                await showToast({
-                  style: Toast.Style.Success,
-                  title: "Original JSON copied to clipboard"
-                });
+                await closeMainWindow();
+                await showHUD("Original JSON copied to clipboard");
               }}
             />
           )}
