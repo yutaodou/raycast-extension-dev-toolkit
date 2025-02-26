@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Action, ActionPanel, Clipboard, Detail } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Detail, showToast, Toast } from "@raycast/api";
 import { encodeURL } from "./actions";
 import { markdown } from "./utils";
 
@@ -46,12 +46,24 @@ export default function Command() {
         <ActionPanel>
           <Action
             title="Copy Encoded URL"
-            onAction={() => Clipboard.copy(result)}
+            onAction={async () => {
+              await Clipboard.copy(result);
+              await showToast({
+                style: Toast.Style.Success,
+                title: "Encoded URL copied to clipboard"
+              });
+            }}
           />
           {original && (
             <Action
               title="Copy Original URL"
-              onAction={() => Clipboard.copy(original)}
+              onAction={async () => {
+                await Clipboard.copy(original);
+                await showToast({
+                  style: Toast.Style.Success,
+                  title: "Original URL copied to clipboard"
+                });
+              }}
             />
           )}
         </ActionPanel>

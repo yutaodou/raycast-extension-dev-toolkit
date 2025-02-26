@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Clipboard, Detail } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Detail, showToast, Toast } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { decodeJWT } from "./actions";
 import { markdown } from "./utils";
@@ -37,13 +37,19 @@ export default function Command() {
   return (
     <Detail
       navigationTitle="Decoded JWT"
-      
+
       markdown={markdown(result)}
       actions={
         <ActionPanel>
           <Action
             title="Copy JSON"
-            onAction={() => Clipboard.copy(JSON.stringify(result, null, 2))}
+            onAction={async () => {
+              await Clipboard.copy(JSON.stringify(result, null, 2));
+              await showToast({
+                style: Toast.Style.Success,
+                title: "JWT copied to clipboard"
+              });
+            }}
           />
         </ActionPanel>
       }

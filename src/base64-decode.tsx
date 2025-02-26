@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Action, ActionPanel, Clipboard, Detail } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Detail, showToast, Toast } from "@raycast/api";
 import { base64Decode } from "./actions";
 import { markdown } from "./utils";
 
@@ -46,12 +46,24 @@ export default function Command() {
         <ActionPanel>
           <Action
             title="Copy Decoded Text"
-            onAction={() => Clipboard.copy(result)}
+            onAction={async () => {
+              await Clipboard.copy(result);
+              await showToast({
+                style: Toast.Style.Success,
+                title: "Decoded text copied to clipboard"
+              });
+            }}
           />
           {original && (
             <Action
               title="Copy Original Text"
-              onAction={() => Clipboard.copy(original)}
+              onAction={async () => {
+                await Clipboard.copy(original);
+                await showToast({
+                  style: Toast.Style.Success,
+                  title: "Original text copied to clipboard"
+                });
+              }}
             />
           )}
         </ActionPanel>

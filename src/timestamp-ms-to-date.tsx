@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Action, ActionPanel, Clipboard, Detail } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Detail, showToast } from "@raycast/api";
+import { useEffect, useState } from "react";
 import { timestampMillisecondToDateString } from "./actions";
 import { markdown } from "./utils";
 
 export default function Command() {
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [original, setOriginal] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,7 +16,6 @@ export default function Command() {
         return;
       }
 
-      setOriginal(text);
       const convertedResult = timestampMillisecondToDateString(text);
 
       if ("error" in convertedResult) {
@@ -46,14 +44,14 @@ export default function Command() {
         <ActionPanel>
           <Action
             title="Copy Converted Date"
-            onAction={() => Clipboard.copy(result)}
+            onAction={() => {
+              Clipboard.copy(result);
+              await showToast({
+                style: Toast.Style.Success,
+                title: "Converted date copied to clipboard",
+              });
+            }}
           />
-          {original && (
-            <Action
-              title="Copy Original Timestamp"
-              onAction={() => Clipboard.copy(original)}
-            />
-          )}
         </ActionPanel>
       }
     />
