@@ -1,41 +1,116 @@
 {
-	"name": "dev-toolbox",
-	"title": "Developer Toolbox",
-	"description": "A collection of utils commonly used in daily development.",
-	"icon": "command-icon.png",
-	"author": "dytes",
-	"license": "MIT",
-	"categories": ["Developer Tools", "Productivity"],
-	"commands": [
-		{
-			"name": "index",
-			"title": "Developer Toolbox",
-			"description": "A collection of utils commonly used in daily development.",
-			"mode": "view"
-		}
-	],
-	"dependencies": {
-		"@raycast/api": "^1.65.0",
-		"date-fns": "^3.2.0",
-		"jsonwebtoken": "^9.0.2",
-		"run-applescript": "^7.0.0"
-	},
-	"devDependencies": {
-		"@babel/preset-env": "^7.23.8",
-		"@babel/preset-typescript": "^7.23.3",
-		"@biomejs/biome": "1.8.2",
-		"@types/jest": "^29.5.11",
-		"@types/jsonwebtoken": "^9.0.5",
-		"@types/node": "~20.11.0",
-		"@types/react": "^18.2.47",
-		"jest": "^29.7.0",
-		"typescript": "^5.3.3"
-	},
-	"scripts": {
-		"build": "ray build -e dist -o out",
-		"dev": "ray develop",
-		"ray-lint": "ray lint",
-		"test": "jest",
-		"check": "biome ci ."
-	}
+  "name": "dev-toolbox",
+  "title": "Developer Toolbox",
+  "description": "A collection of utils commonly used in daily development.",
+  "icon": "command-icon.png",
+  "author": "dytes",
+  "license": "MIT",
+  "categories": [
+    "Developer Tools",
+    "Productivity"
+  ],
+  "commands": [
+    {
+      "name": "base64-encode",
+      "title": "Base64 Encode",
+      "description": "Base64 encode text from clipboard",
+      "mode": "no-view"
+    },
+    {
+      "name": "base64-decode",
+      "title": "Base64 Decode",
+      "description": "Base64 decode text from clipboard",
+      "mode": "no-view"
+    },
+    {
+      "name": "url-encode",
+      "title": "URL Encode",
+      "description": "URL encode text from clipboard",
+      "mode": "no-view"
+    },
+    {
+      "name": "url-decode",
+      "title": "URL Decode",
+      "description": "URL decode text from clipboard",
+      "mode": "no-view"
+    },
+    {
+      "name": "jwt-decode",
+      "title": "JWT Decode",
+      "description": "Decode JWT token from clipboard",
+      "mode": "no-view"
+    },
+    {
+      "name": "timestamp",
+      "title": "Timestamp",
+      "description": "Return the timestamp in seconds since the epoch",
+      "mode": "no-view"
+    },
+    {
+      "name": "timestamp-ms",
+      "title": "Timestamp in Milliseconds",
+      "description": "Return the timestamp in milliseconds since the epoch",
+      "mode": "no-view"
+    },
+    {
+      "name": "local-date",
+      "title": "Local Date",
+      "description": "Return local date in ISO8601 format",
+      "mode": "no-view"
+    },
+    {
+      "name": "timestamp-to-date",
+      "title": "Timestamp(second) to Date",
+      "description": "Convert timestamp in second to date and return in ISO8601 format",
+      "mode": "no-view"
+    },
+    {
+      "name": "timestamp-ms-to-date",
+      "title": "Timestamp(millisecond) to Date",
+      "description": "Convert timestamp in millisecond to date and return in ISO8601 format",
+      "mode": "no-view"
+    },
+    {
+      "name": "prettify-json",
+      "title": "Prettify JSON",
+      "description": "Prettify JSON text from clipboard",
+      "mode": "no-view"
+    },
+    {
+      "name": "minify-json",
+      "title": "Minify JSON",
+      "description": "Minify JSON text from clipboard",
+      "mode": "no-view"
+    },
+    {
+      "name": "uuid",
+      "title": "Generate UUID",
+      "description": "Generate UUID and copy to clipboard",
+      "mode": "no-view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.65.0",
+    "date-fns": "^3.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "run-applescript": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.23.8",
+    "@babel/preset-typescript": "^7.23.3",
+    "@biomejs/biome": "1.8.2",
+    "@types/jest": "^29.5.11",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "~20.11.0",
+    "@types/react": "^18.2.47",
+    "jest": "^29.7.0",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist -o out",
+    "dev": "ray develop",
+    "ray-lint": "ray lint",
+    "test": "jest",
+    "check": "biome ci ."
+  }
 }
