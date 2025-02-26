@@ -1,37 +1,52 @@
-import { Clipboard, showHUD } from "@raycast/api";
+import { Action, ActionPanel, Clipboard, Detail } from "@raycast/api";
+import { useEffect, useState } from "react";
 import { decodeJWT } from "./actions";
+import { markdown } from "./utils";
 
-export default async function Command() {
-  try {
-    const text = await Clipboard.readText();
+export default function Command() {
+  const [result, setResult] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-    if (!text) {
-      await showHUD("Clipboard is empty");
-      return;
+  useEffect(() => {
+    async function fetchData() {
+      const text = await Clipboard.readText();
+
+      if (!text) {
+        setError("Clipboard is empty");
+        return;
+      }
+
+      const decodedResult = decodeJWT(text);
+      if ("error" in decodedResult) {
+        setError(decodedResult.error.message);
+        return;
+      }
+      setResult(decodedResult.value);
     }
+    fetchData();
+  }, []);
 
-    const result = decodeJWT(text);
-
-    if ("error" in result) {
-      await showHUD(`Error: ${result.error.message}`);
-      return;
-    }
-
-    await Clipboard.copy(result.value);
-
-    // Parse the decoded JSON to extract some useful information for the preview
-    try {
-      const decoded = JSON.parse(result.value);
-      const subject = decoded.sub ? `sub: ${decoded.sub}` : '';
-      const issuer = decoded.iss ? `iss: ${decoded.iss}` : '';
-      const info = [subject, issuer].filter(Boolean).join(', ');
-
-      await showHUD(`JWT decoded: ${info || 'Token copied to clipboard'}`);
-    } catch {
-      // If parsing fails, just show a generic message
-      await showHUD("JWT decoded and copied to clipboard");
-    }
-  } catch (error) {
-    await showHUD(`Error: ${error instanceof Error ? error.message : String(error)}`);
+  if (error) {
+    return <Detail markdown={`# Error \n ${error}`} />;
   }
+
+  if (!result) {
+    return <Detail isLoading />;
+  }
+
+  return (
+    <Detail
+      navigationTitle="Decoded JWT"
+      
+      markdown={markdown(result)}
+      actions={
+        <ActionPanel>
+          <Action
+            title="Copy JSON"
+            onAction={() => Clipboard.copy(JSON.stringify(result, null, 2))}
+          />
+        </ActionPanel>
+      }
+    />
+  );
 }

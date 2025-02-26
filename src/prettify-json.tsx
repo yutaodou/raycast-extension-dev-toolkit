@@ -1,31 +1,61 @@
-import { Clipboard, showHUD } from "@raycast/api";
+import React, { useEffect, useState } from "react";
+import { Action, ActionPanel, Clipboard, Detail } from "@raycast/api";
 import { prettifyJSON } from "./actions";
+import { markdown } from "./utils";
 
-export default async function Command() {
-  try {
-    const text = await Clipboard.readText();
-    
-    if (!text) {
-      await showHUD("Clipboard is empty");
-      return;
+export default function Command() {
+  const [result, setResult] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [original, setOriginal] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const text = await Clipboard.readText();
+
+      if (!text) {
+        setError("Clipboard is empty");
+        return;
+      }
+
+      setOriginal(text);
+      const prettifiedResult = prettifyJSON(text);
+
+      if ("error" in prettifiedResult) {
+        setError(prettifiedResult.error.message);
+        return;
+      }
+
+      setResult(prettifiedResult.value);
     }
-    
-    const result = prettifyJSON(text);
-    
-    if ("error" in result) {
-      await showHUD(`Error: ${result.error.message}`);
-      return;
-    }
-    
-    await Clipboard.copy(result.value);
-    
-    // Show a short preview if the output is long
-    const shortenedValue = result.value.length > 50 
-      ? result.value.substring(0, 47) + "..." 
-      : result.value;
-    
-    await showHUD(`JSON prettified: ${shortenedValue}`);
-  } catch (error) {
-    await showHUD(`Error: ${error instanceof Error ? error.message : String(error)}`);
+    fetchData();
+  }, []);
+
+  if (error) {
+    return <Detail markdown={`# Error \n ${error}`} />;
   }
+
+  if (!result) {
+    return <Detail isLoading />;
+  }
+
+  return (
+    <Detail
+      navigationTitle="Prettified JSON"
+      markdown={markdown(result)}
+      actions={
+        <ActionPanel>
+          <Action
+            title="Copy Prettified JSON"
+            onAction={() => Clipboard.copy(result)}
+          />
+          {original && (
+            <Action
+              title="Copy Original JSON"
+              onAction={() => Clipboard.copy(original)}
+            />
+          )}
+        </ActionPanel>
+      }
+    />
+  );
 }

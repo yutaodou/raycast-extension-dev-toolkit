@@ -14,31 +14,31 @@
       "name": "base64-encode",
       "title": "Base64 Encode",
       "description": "Base64 encode text from clipboard",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "base64-decode",
       "title": "Base64 Decode",
       "description": "Base64 decode text from clipboard",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "url-encode",
       "title": "URL Encode",
       "description": "URL encode text from clipboard",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "url-decode",
       "title": "URL Decode",
       "description": "URL decode text from clipboard",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "jwt-decode",
       "title": "JWT Decode",
       "description": "Decode JWT token from clipboard",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "timestamp",
@@ -62,25 +62,25 @@
       "name": "timestamp-to-date",
       "title": "Timestamp(second) to Date",
       "description": "Convert timestamp in second to date and return in ISO8601 format",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "timestamp-ms-to-date",
       "title": "Timestamp(millisecond) to Date",
       "description": "Convert timestamp in millisecond to date and return in ISO8601 format",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "prettify-json",
       "title": "Prettify JSON",
       "description": "Prettify JSON text from clipboard",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "minify-json",
       "title": "Minify JSON",
       "description": "Minify JSON text from clipboard",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "uuid",
@@ -90,8 +90,8 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.65.0",
-    "date-fns": "^3.2.0",
+    "@raycast/api": "^1.92.0",
+    "date-fns": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "run-applescript": "^7.0.0"
   },
